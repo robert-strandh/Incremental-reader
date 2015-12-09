@@ -2,5 +2,5 @@
 
 (defpackage #:incremental-reader
   (:use #:common-lisp)
-  (:shadow #:character)
+  (:shadow #:character #:error)
   (:export))
