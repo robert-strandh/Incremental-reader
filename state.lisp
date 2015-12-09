@@ -7,9 +7,6 @@
 ;;; value was returned and the reader must be restarted.
 (defvar *return-value*)
 
-(defun make-token (vector)
-  vector)
-
 (defgeneric clone (state))
 
 (defgeneric process (state syntax-type))
