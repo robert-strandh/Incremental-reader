@@ -45,6 +45,20 @@
 
 (defclass state () ())
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; State class MACRO-RETURN.
+;;;
+;;; This state means that a macro character has been fully processed.
+;;; There are two possibilities for *RETURN-VALUE*.  Either it is the
+;;; empty list, meaning that no value was returned form processing the
+;;; macro character.  In that case, we restart the reader in the
+;;; initial state.  Or else, *RETURN-VALUE* is a singleton list,
+;;; meaning that the CAR of that list was the value returned from
+;;; processing the macro character.  In that case, we set
+;;; *RETURN-VALUE* to that return value, and we return the empty list,
+;;; meaning we pop the stack.
+
 (defclass macro-return (state) ())
 
 (defmethod process ((state macro-return) syntax-type)
