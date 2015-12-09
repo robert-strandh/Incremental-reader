@@ -8,4 +8,5 @@
    (:file "token")
    (:file "syntax-type")
    (:file "state")
-   (:file "list-reader")))
+   (:file "list-reader")
+   (:file "demo")))
