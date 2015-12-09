@@ -1,5 +1,10 @@
 (cl:in-package #:incremental-reader)
 
+;;; This variable is used to communicate between callee and caller.
+;;; When the reader returns, this variable contains a normal return
+;;; value.  When a reader macro processor returns, this variable
+;;; contains a list of values, so that the empty list means that no
+;;; value was returned and the reader must be restarted.
 (defvar *return-value*)
 
 (defun make-token (vector)
