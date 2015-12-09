@@ -13,9 +13,35 @@
 ;;; preserved.
 (defgeneric clone (state))
 
+;;; This generic function is called repeatedly with the current state
+;;; of the reader and for each character.
+;;;
+;;; Before this generic function is called, the current state has been
+;;; popped off the stack.
+;;;
+;;; Method may assume that STATE can be mutated, including by changing
+;;; its class.
+;;;
+;;; One or two values should be returned by each method.  The first
+;;; value is used to represent how that stack should change.  In the
+;;; most general case, the first value is a list of states to be
+;;; APPENDed to the beginning (top) of the stack.  The convention
+;;; includes returning the empty list, effectively popping the stack.
+;;; As a shorthand, the first value can be a single state, which
+;;; designates a singleton list.  The second value is a Boolean.  When
+;;; absent or NIL, this indicates to the caller that the character
+;;; represented by SYNTAX-TYPE has been fully processed.  When the
+;;; second value is true, the same syntax type should be processed
+;;; again.
 (defgeneric process (state syntax-type))
 
 (defgeneric macro-character-state (syntax-type))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Class STATE.
+;;;
+;;; This is the base class for all state classes.
 
 (defclass state () ())
 
