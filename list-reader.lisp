@@ -25,7 +25,3 @@
 (defmethod process ((state list-reader) syntax-type)
   (values (list state (make-instance 'initial-state))
 	  t))
-
-(defmethod process ((state list-reader) (syntax-type closing-parenthesis))
-  (setf *return-value* (list (reverse (elements state))))
-  '())
