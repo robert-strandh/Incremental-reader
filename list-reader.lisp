@@ -7,14 +7,15 @@
   ())
 
 (defclass list-reader (state)
-  ((%elements :initform '() :initarg :elements :reader elements)))
+  ((%elements :initform '() :initarg :elements :accessor elements)))
 
 (defmethod clone ((state list-reader))
   (make-instance (class-of state)
     :elements (elements state)))
 
 (defmethod macro-character-state ((syntax-type open-parenthesis))
-  (make-instance 'list-reader))
+  (list (make-instance 'initial)
+	(make-instance 'list-reader)))
 
 (defclass end-list-reader (state)
   ())
@@ -23,7 +24,8 @@
   (make-instance 'end-list-reader))
 
 (defmethod process ((state list-reader) syntax-type)
-  (values (list state (make-instance 'initial-state))
+  (push *return-value* (elements state))
+  (values (list state (make-instance 'initial))
 	  t))
 
 (defmethod process ((state end-list-reader) syntax-type)
