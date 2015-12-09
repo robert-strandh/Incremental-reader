@@ -16,6 +16,12 @@
 (defmethod macro-character-state ((syntax-type open-parenthesis))
   (make-instance 'list-reader))
 
+(defclass end-list-reader (state)
+  ())
+
+(defmethod macro-character-state ((syntax-type closing-parenthesis))
+  (make-instance 'end-list-reader))
+
 (defmethod process ((state list-reader) syntax-type)
   (values (list state (make-instance 'initial-state))
 	  t))
