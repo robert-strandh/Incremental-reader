@@ -140,6 +140,11 @@
   (setf *return-value* (make-token (token state)))
   (values '() t))
 
+(defmethod process ((state even-multiple-escape-seen)
+		    (syntax-type terminating-macro))
+  (setf *return-value* (make-token (token state)))
+  (values '() t))
+
 (defmethod process ((state even-multiple-and-single-escape-seen)
 		    syntax)
   (vector-push-extend (character syntax) (token state))
