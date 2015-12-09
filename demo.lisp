@@ -14,6 +14,12 @@
 	 (make-instance 'constituent
 	   :character character))))
 
+(defun next (character)
+  (multiple-value-bind (state-list-designator keep-character-p)
+      (process (pop *stack*) (make-syntax character))
+    (update-stack state-list-designator)
+    keep-character-p))
+
 (defun initialize-stack ()
   (setf *stack*
 	(list (make-instance 'initial))))
