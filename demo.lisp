@@ -28,9 +28,13 @@
   (loop for character across string
 	for syntax = (make-syntax character)
 	for result = (multiple-value-list (process (pop *stack*) syntax))
-	do (maybe-push (car result))
+	do (when (null *stack*)
+	     (return-from demo *return-value*))
+	   (maybe-push (car result))
 	   (loop until (null (cadr result))
-		 do (setf result
+		 do (when (null *stack*)
+		      (return-from demo *return-value*))
+		    (setf result
 			  (multiple-value-list (process (pop *stack*) syntax)))
 		    (maybe-push (car result)))))
 
