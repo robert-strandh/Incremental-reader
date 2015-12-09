@@ -47,6 +47,14 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; State class ERROR.
+;;;
+;;; This state is entered whenever there is a syntax error.
+
+(defclass error (state) ())
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; State class MACRO-RETURN.
 ;;;
 ;;; This state means that a macro character has been fully processed.
