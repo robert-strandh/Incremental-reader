@@ -4,5 +4,6 @@
   :serial t
   :components
   ((:file "packages")
+   (:file "stack")
    (:file "syntax-type")
    (:file "state")))
