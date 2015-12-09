@@ -25,7 +25,7 @@
 
 (defmethod process ((state list-reader) syntax-type)
   (push *return-value* (elements state))
-  (values (list state (make-instance 'initial))
+  (values (list (make-instance 'initial) state)
 	  t))
 
 (defmethod process ((state end-list-reader) syntax-type)
