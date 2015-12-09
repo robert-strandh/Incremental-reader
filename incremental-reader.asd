@@ -5,5 +5,6 @@
   :components
   ((:file "packages")
    (:file "stack")
+   (:file "token")
    (:file "syntax-type")
    (:file "state")))
