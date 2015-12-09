@@ -7,4 +7,5 @@
    (:file "stack")
    (:file "token")
    (:file "syntax-type")
-   (:file "state")))
+   (:file "state")
+   (:file "list-reader")))
