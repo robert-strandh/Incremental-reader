@@ -25,3 +25,14 @@
 (defmethod process ((state list-reader) syntax-type)
   (values (list state (make-instance 'initial-state))
 	  t))
+
+(defmethod process ((state end-list-reader) syntax-type)
+  (values (if (typep (first *stack*) 'list-reader)
+	      (progn (setf *return-value*
+			   (list (reverse (elements (first *stack*)))))
+		     (pop *stack*)
+		     ;; We do not push any new state on the stack.
+		     '())
+	      (make-instance 'error))
+	  ;; We do not consume the current character.
+	  t))
