@@ -14,14 +14,6 @@
 	 (make-instance 'constituent
 	   :character character))))
 
-(defun maybe-push (designator)
-  (cond ((null designator)
-	 nil)
-	((listp designator)
-	 (setf *stack* (append designator *stack*)))
-	(t
-	 (push designator *stack*))))
-
 (defun initialize-stack ()
   (setf *stack*
 	(list (make-instance 'initial))))
@@ -33,12 +25,12 @@
 	for result = (multiple-value-list (process (pop *stack*) syntax))
 	do (when (null *stack*)
 	     (return-from demo *return-value*))
-	   (maybe-push (car result))
+	   (update-stack (car result))
 	   (loop until (null (cadr result))
 		 do (when (null *stack*)
 		      (return-from demo *return-value*))
 		    (setf result
 			  (multiple-value-list (process (pop *stack*) syntax)))
-		    (maybe-push (car result)))))
+		    (update-stack (car result)))))
 
 			  
