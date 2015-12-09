@@ -22,9 +22,12 @@
 	(t
 	 (push designator *stack*))))
 
-(defun demo (string)
+(defun initialize-stack ()
   (setf *stack*
-	(list (make-instance 'initial)))
+	(list (make-instance 'initial))))
+
+(defun demo (string)
+  (initialize-stack)
   (loop for character across string
 	for syntax = (make-syntax character)
 	for result = (multiple-value-list (process (pop *stack*) syntax))
