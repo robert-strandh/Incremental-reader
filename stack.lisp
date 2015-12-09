@@ -4,11 +4,12 @@
 ;;; the class STATE.
 (defparameter *stack* '())
 
+(defun canonicalize-state-list-designator (state-list-designator)
+  (if (listp state-list-designator)
+      state-list-designator
+      (list state-list-designator)))
+
 (defun update-stack (state-list-designator)
-  (cond ((null state-list-designator)
-	 nil)
-	((listp state-list-designator)
-	 (setf *stack* (append state-list-designator *stack*)))
-	(t
-	 (push state-list-designator *stack*)))
-  *stack*)
+  (setf *stack*
+	(append (canonicalize-state-list-designator state-list-designator)
+		*stack*)))
