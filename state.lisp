@@ -94,6 +94,10 @@
   (list (macro-character-state syntax-type)
 	(make-instance 'macro-return)))
 
+(defmethod process ((state initial) (syntax-type constituent))
+  (make-instance 'even-multiple-escape-seen
+    :token (clone-vector (vector (character syntax-type)))))
+
 (defclass token-accumulation (state)
   ((%token :initform (make-array 0 :adjustable t :fill-pointer 0)
 	   :initarg :token
