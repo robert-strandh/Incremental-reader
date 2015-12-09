@@ -7,6 +7,10 @@
 ;;; value was returned and the reader must be restarted.
 (defvar *return-value*)
 
+;;; This generic function is called in order to clone a state.  States
+;;; do not have to be cloned for every character read.  They need to
+;;; be cloned only when the previous state of the reader must be
+;;; preserved.
 (defgeneric clone (state))
 
 (defgeneric process (state syntax-type))
