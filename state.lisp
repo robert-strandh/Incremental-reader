@@ -91,8 +91,9 @@
   state)
 
 (defmethod process ((state initial) (syntax-type macro-character))
-  (list (macro-character-state syntax-type)
-	(make-instance 'macro-return)))
+  (append (canonicalize-state-list-designator
+	   (macro-character-state syntax-type))
+	  (list (make-instance 'macro-return))))
 
 (defmethod process ((state initial) (syntax-type constituent))
   (make-instance 'even-multiple-escape-seen
