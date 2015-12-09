@@ -29,10 +29,10 @@
 	  t))
 
 (defmethod process ((state end-list-reader) syntax-type)
-  (values (if (typep (first *stack*) 'list-reader)
+  (values (if (typep (second *stack*) 'list-reader)
 	      (progn (setf *return-value*
-			   (list (reverse (elements (first *stack*)))))
-		     (pop *stack*)
+			   (list (reverse (elements (second *stack*)))))
+		     (setf *stack* (rest (rest *stack*)))
 		     ;; We do not push any new state on the stack.
 		     '())
 	      (make-instance 'error))
