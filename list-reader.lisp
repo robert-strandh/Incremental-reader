@@ -15,7 +15,7 @@
 
 (defmethod macro-character-state ((syntax-type open-parenthesis))
   (list (make-instance 'initial)
-	(make-instance 'list-reader)))
+        (make-instance 'list-reader)))
 
 (defclass end-list-reader (state)
   ())
@@ -26,15 +26,15 @@
 (defmethod process ((state list-reader) syntax-type)
   (push *return-value* (elements state))
   (values (list (make-instance 'initial) state)
-	  t))
+          t))
 
 (defmethod process ((state end-list-reader) syntax-type)
   (values (if (typep (second *stack*) 'list-reader)
-	      (progn (setf *return-value*
-			   (list (reverse (elements (second *stack*)))))
-		     (setf *stack* (rest (rest *stack*)))
-		     ;; We do not push any new state on the stack.
-		     '())
-	      (make-instance 'error))
-	  ;; We do not consume the current character.
-	  t))
+              (progn (setf *return-value*
+                           (list (reverse (elements (second *stack*)))))
+                     (setf *stack* (rest (rest *stack*)))
+                     ;; We do not push any new state on the stack.
+                     '())
+              (make-instance 'error))
+          ;; We do not consume the current character.
+          t))
